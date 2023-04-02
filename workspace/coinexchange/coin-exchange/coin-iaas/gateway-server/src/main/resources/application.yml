@@ -1,0 +1,47 @@
+server:
+  port: 80
+spring:
+  application:
+    name: cyj-gateway-server
+  cloud:
+    nacos:
+      discovery:
+        server-addr: nacos-server:8848
+    gateway:
+      discovery:
+        locator:
+          enabled: true #开启服务发现
+          lower-case-service-id: true #admin-server  小驼峰规则
+      routes:
+        - id: admin-service_router #后台管理服务的网关
+          uri: lb://admin-service #转发到哪个目的地
+          predicates: #断言
+            - Path=/admin/** # 哪种请求过来转发到 lb://admin-service
+        - id: test_router #测试网关
+          uri: http://www.aliyun.com #去这里
+          predicates: #断言
+            - Path=/product # 哪种请求过来转发到 http://www.baidu.com/
+          #通过网关完成对2种维度的限流；网关维度 +API分组
+    sentinel:
+      datasource:
+#        ds1.file:
+#          file: classpath:gw-flow.json #网关 + API分组限流
+#          ruleType: gw_flow
+          ds1.nacos:
+            #使用 nacos持久化sentinel数据时需要添加NacosDataSource的依赖
+            #ClassNotFoundException: com.alibaba.csp.sentinel.datasource.nacos.NacosDataSource
+            serverAddr: nacos-server:8848
+            dataId: gw-flow
+            ruleType: gw_flow
+          ds2.nacos:
+            serverAddr: nacos-server:8848
+            dataId: api-group
+            ruleType: gw_api_group
+      transport:
+        dashboard: sentinel-server:8858 # sentinel-dashboard在阿里云里
+#        ds2.file:
+#          file: classpath:api-gropu.json
+#          ruleType: gw_api_group
+# 演示了sentinel-dashboard 的规则定义 而且规则定义好之后我们的网关能立马感知到（生效）（nacos无法感知到），但是我们下次重启会丢失规则。--》nacos
+
+
