@@ -9,7 +9,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="gateway-server" />
         <module name="math-api" />
-        <module name="math-service" />
+        <module name="coin-commom" />
         <module name="exchange-service" />
         <module name="chan-api" />
         <module name="admin-service" />
@@ -18,9 +18,9 @@
         <module name="member-service" />
         <module name="finance-api" />
         <module name="exchange-api" />
-        <module name="admin-api" />
         <module name="member-api" />
-        <module name="coin-commom" />
+        <module name="admin-api" />
+        <module name="math-service" />
         <module name="authorization-server" />
         <module name="statistics-service" />
         <module name="coin-task" />

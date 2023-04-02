@@ -17,5 +17,18 @@
             <artifactId>finance-api</artifactId>
             <version>1.0</version>
         </dependency>
+        <dependency>
+            <groupId>org.yingjun</groupId>
+            <artifactId>coin-admin</artifactId>
+            <version>1.0</version>
+        </dependency>
     </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 </project>
