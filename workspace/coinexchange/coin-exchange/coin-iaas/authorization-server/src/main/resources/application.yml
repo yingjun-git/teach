@@ -1,0 +1,12 @@
+server:
+  port: 9999
+spring:
+  application:
+    name: cyj-authorization-server
+  cloud:
+    nacos:
+      discovery:
+        server-addr: nacos-server:8848
+  redis:
+    port: 6380
+    host: redis-server
